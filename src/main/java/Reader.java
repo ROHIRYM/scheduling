@@ -32,7 +32,7 @@ public class Reader {
         arrayOfRadioGroups = new ArrayList<ArrayList<JRadioButton>>();
         radioGroupIndex = 0;
         jFrame.add(new JLabel("Предмет:"));
-        jFrame.add(new JLabel("К-ть годин/тиждень:"));
+        jFrame.add(new JLabel("К-ть пар/тиждень:"));
         jFrame.add(new JLabel("Викладач:"));
         fillLabels(this.N - 3);
         finalSubjects = new ArrayList<String>();
