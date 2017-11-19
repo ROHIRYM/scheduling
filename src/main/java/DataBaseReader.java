@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class DataBaseReader {
     private final String URL = "jdbc:mysql://localhost:3306/school";
     private final String USERNAME = "root";
-    private final String PASSWORD = "root";
+    private final String PASSWORD = "кщще";
     private HashMap<String, ArrayList<String>> subjectsOfLevels;
     private HashMap<String, ArrayList<String>> teachersOfSubjects;
 
@@ -28,7 +28,7 @@ public class DataBaseReader {
             Driver driver = new FabricMySQLDriver();
             DriverManager.registerDriver(driver);
             System.out.println("1");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "кщще");
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("2");
             Statement statement = connection.createStatement();
             ResultSet levelResultSet = statement.executeQuery("SELECT levels.name, subjects.name FROM levels INNER JOIN programs ON levels.id=programs.level_id INNER JOIN subjects ON subjects.id=programs.subject_id;");
