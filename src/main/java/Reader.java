@@ -20,9 +20,11 @@ public class Reader {
     private ArrayList<String> finalSubjects;
     private ArrayList<Integer> finalHours;
     private ArrayList<String> finalTeachers;
+    private ArrayList<String> allTeachers;
 
     public Reader(String s,
-                  HashMap<String, ArrayList<String>> teachersOfCertainSubjects, int N) {
+                  HashMap<String, ArrayList<String>> teachersOfCertainSubjects, int N, ArrayList<String> allTeachers) {
+        this.allTeachers = allTeachers;
         this.N = N;
         jFrame = new JFrame(s);
         jFrame.setLayout(new GridLayout(0, this.N));
@@ -91,7 +93,7 @@ public class Reader {
                     jFrame.setVisible(false);
                     counter--;
                     if (counter == 0) {
-                        new TimeTable();
+                        new TimeTable(allTeachers);
                     }
                 }
             } catch (NumberFormatException ex) {

@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class FeaturesDeterminer {
     private String[] levels;
@@ -36,7 +33,18 @@ public class FeaturesDeterminer {
                 }
             }
             levels[i] = pair.getKey();
-            readers[i] = new Reader(levels[i], teachersOfCertainSubjects, 7);
+            HashSet<String> allTeachersSet = new HashSet<String>();
+            Iterator<Map.Entry<String, ArrayList<String>>> iterator1 = teachersOfSubjects
+                    .entrySet().iterator();
+            while (iterator1.hasNext()) {
+                Map.Entry<String, ArrayList<String>> pair1 = iterator1.next();
+                ArrayList<String> teachs = pair1.getValue();
+                for (String t : teachs) {
+                    allTeachersSet.add(t);
+                }
+            }
+            ArrayList<String> allTeachersList = new ArrayList<String>(allTeachersSet);
+            readers[i] = new Reader(levels[i], teachersOfCertainSubjects, 7, allTeachersList);
             i++;
         }
     }

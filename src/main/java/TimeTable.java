@@ -8,8 +8,11 @@ public class TimeTable {
     private ArrayList<Lesson[]> wednesday;
     private ArrayList<Lesson[]> thursday;
     private ArrayList<Lesson[]> friday;
+    private ArrayList<String> allTeachers;
 
-    public TimeTable() {
+    public TimeTable(ArrayList<String> allTeachers) {
+        System.out.println(allTeachers.size());
+        this.allTeachers = allTeachers;
         FeaturesDeterminer featuresDeterminer = Main.featuresDeterminer;
         this.levels = featuresDeterminer.getLevels();
         Reader[] readers = featuresDeterminer.getReaders();
@@ -36,6 +39,7 @@ public class TimeTable {
         this.friday = new ArrayList();
         this.fillDays(matrix, len);
         this.showSchedule();
+        this.showTeachersSchedule();
     }
 
     private void fillLessons(ArrayList<Lesson> lessons, String level, ArrayList<String> finalSubjects, ArrayList<Integer> finalHours, ArrayList<String> finalTeachers) {
@@ -128,5 +132,13 @@ public class TimeTable {
         new Schedule(this.numOfLevels, this.levels, this.wednesday, "Середа");
         new Schedule(this.numOfLevels, this.levels, this.tuesday, "Вівторок");
         new Schedule(this.numOfLevels, this.levels, this.monday, "Понеділок");
+    }
+
+    private void showTeachersSchedule() {
+        new TeachersSchedule(this.friday, "П'ятниця", allTeachers);
+        new TeachersSchedule(this.thursday, "Четвер", allTeachers);
+        new TeachersSchedule(this.wednesday, "Середа", allTeachers);
+        new TeachersSchedule(this.tuesday, "Вівторок", allTeachers);
+        new TeachersSchedule(this.monday, "Понеділок", allTeachers);
     }
 }

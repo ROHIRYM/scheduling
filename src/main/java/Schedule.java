@@ -12,6 +12,17 @@ public class Schedule {
     private JFrame jFrame;
 
     public Schedule(int numOfLevels, String[] levels, ArrayList<Lesson[]> day, String s) {
+        System.out.println("Num: " + numOfLevels);
+        System.out.println("Levels:");
+        for (String ss : levels) {
+            System.out.println(ss);
+        }
+        System.out.println(s + ":");
+        for (Lesson[] les : day) {
+            for (Lesson le : les) {
+                System.out.println(le);
+            }
+        }
         this.numOfColumns = (int) Math
                 .ceil(numOfLevels / 2);
         this.numOfLevels = numOfLevels;

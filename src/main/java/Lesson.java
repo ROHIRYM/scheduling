@@ -3,6 +3,12 @@ public class Lesson {
     private String teacher;
     private String subject;
 
+    public Lesson(String level, String subject) {
+        this.level = level;
+        this.teacher = "";
+        this.subject = subject;
+    }
+
     public Lesson(String level, String teacher, String subject) {
         this.level = level;
         this.teacher = teacher;
