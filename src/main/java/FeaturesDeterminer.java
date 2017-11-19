@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.Map;
 
 public class FeaturesDeterminer {
     private String[] levels;
@@ -9,42 +9,43 @@ public class FeaturesDeterminer {
 
     public FeaturesDeterminer() {
         DataBaseReader dataBaseReader = new DataBaseReader();
-        HashMap<String, ArrayList<String>> subjectsOfLevels = dataBaseReader.getSubjectsOfLevels();
-        HashMap<String, ArrayList<String>> teachersOfSubjects = dataBaseReader.getTeachersOfSubjects();
+        HashMap<String, ArrayList<String>> subjectsOfLevels = dataBaseReader
+                .getSubjectsOfLevels();
+        HashMap<String, ArrayList<String>> teachersOfSubjects = dataBaseReader
+                .getTeachersOfSubjects();
         int allLevels = subjectsOfLevels.size();
         Reader.setCounter(allLevels);
-        this.levels = new String[allLevels];
-        this.readers = new Reader[allLevels];
-        this.createWindows(subjectsOfLevels, teachersOfSubjects);
+        levels = new String[allLevels];
+        readers = new Reader[allLevels];
+        createWindows(subjectsOfLevels, teachersOfSubjects);
     }
 
-    private void createWindows(HashMap<String, ArrayList<String>> subjectsOfLevels, HashMap<String, ArrayList<String>> teachersOfSubjects) {
+    private void createWindows(
+            HashMap<String, ArrayList<String>> subjectsOfLevels,
+            HashMap<String, ArrayList<String>> teachersOfSubjects) {
         int i = 0;
-
-        for(Iterator iterator = subjectsOfLevels.entrySet().iterator(); iterator.hasNext(); ++i) {
-            Entry<String, ArrayList<String>> pair = (Entry)iterator.next();
-            ArrayList<String> subjects = (ArrayList)pair.getValue();
-            HashMap<String, ArrayList<String>> teachersOfCertainSubjects = new HashMap();
-            Iterator var9 = subjects.iterator();
-
-            while(var9.hasNext()) {
-                String subject = (String)var9.next();
+        Iterator<Map.Entry<String, ArrayList<String>>> iterator = subjectsOfLevels
+                .entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, ArrayList<String>> pair = iterator.next();
+            ArrayList<String> subjects = pair.getValue();
+            HashMap<String, ArrayList<String>> teachersOfCertainSubjects = new HashMap<String, ArrayList<String>>();
+            for (String subject : subjects) {
                 if (teachersOfSubjects.containsKey(subject)) {
-                    teachersOfCertainSubjects.put(subject, (ArrayList)teachersOfSubjects.get(subject));
+                    teachersOfCertainSubjects.put(subject, teachersOfSubjects.get(subject));
                 }
             }
-
-            this.levels[i] = (String)pair.getKey();
-            this.readers[i] = new Reader(this.levels[i], teachersOfCertainSubjects, 7);
+            levels[i] = pair.getKey();
+            readers[i] = new Reader(levels[i], teachersOfCertainSubjects, 7);
+            i++;
         }
-
     }
 
     public String[] getLevels() {
-        return this.levels;
+        return levels;
     }
 
     public Reader[] getReaders() {
-        return this.readers;
+        return readers;
     }
 }
